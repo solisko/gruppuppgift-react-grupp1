@@ -6,7 +6,7 @@ const Navigation = () => {
     return(
         <nav className= {styles.header}>
             <h1>Auctioneers</h1>
-            <ul>
+            <ul className= {styles.navLinks}>
                 <li><NavLink to="/">Hem</NavLink></li>
                 <li><NavLink to="/create">Skapa auktion</NavLink></li>
             </ul>
