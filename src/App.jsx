@@ -1,11 +1,16 @@
+import { BrowserRouter } from 'react-router-dom'
 import './App.css'
-import Header from './Header/Header'
+import Navigation from './Header/Navigation'
+import Switch from './Header/Switch'
 
 function App() {
 
   return (
     <>
-      <Header />
+      <BrowserRouter>
+        <Navigation />
+        <Switch />
+      </BrowserRouter>
     </>
   )
 }
