@@ -8,11 +8,11 @@ import Switch from './Header/Switch'
 function App() {
   return (
     <>
-      <FetchAuctions />
       <BrowserRouter>
         <Navigation />
         <Switch />
       </BrowserRouter>
+      <FetchAuctions />
     </>
   );
 }
