@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: rgb(161, 117, 117);
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    font-size: 20px;
+    margin: 0 auto;
+}
+
+.navLinks {
+    display: flex;
+    margin-right: 20px;
+    color: white;
+}
+
+li {
+    padding: 5px;
+    list-style: none;
+}
+
+
+/*ska eventuellt flyttas till en :root */
+body {
+    margin: 0px;
+}
