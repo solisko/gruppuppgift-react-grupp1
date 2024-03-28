@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuctionContext } from "../../Context/AuctionProvider";
+import { AuctionContext } from "../../Context/AuctionContextProvider";
 
 export default function ListAuctions() {
   const { auctions } = useContext(AuctionContext);
@@ -7,7 +7,7 @@ export default function ListAuctions() {
     <>
       {auctions.length ? (
         <div>
-          {fetchAll.map((auction, index) => (
+          {auctions.map((auction, index) => (
             <div key={index}>{auction.Title}</div>
           ))}
         </div>
