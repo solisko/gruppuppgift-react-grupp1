@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const AuctionContext = createContext();
 
@@ -8,7 +8,7 @@ const AuctionProvider = (props) => {
   useEffect(() => {
     const fetchAuctions = async () => {
       try {
-        const response = await fetch(``);
+        const response = await fetch(`https://auctioneer.azurewebsites.net/auction/1zyx`);
         if (!response.ok) {
           throw new Error("Failed to fetch auctions");
         }

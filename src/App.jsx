@@ -1,18 +1,22 @@
 import "./App.css";
-import FetchAuctions from "./components/FetchAuctions/FetchAuctions";
-import { BrowserRouter } from 'react-router-dom'
-import './App.css'
-import Navigation from './Header/Navigation'
-import Switch from './Header/Switch'
+import AuctionContextProvider from "./Context/AuctionContextProvider";
+import { BrowserRouter } from "react-router-dom";
+import Navigation from "./Header/Navigation";
+import Switch from "./Header/Switch";
+import ListAuctions from "./components/ListAuctions/ListAuctions"
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Navigation />
-        <Switch />
-      </BrowserRouter>
-      <FetchAuctions />
+      <div className="App">
+        <AuctionContextProvider>
+          <BrowserRouter>
+            <Navigation />
+            <Switch />
+          </BrowserRouter>
+          <ListAuctions/>
+        </AuctionContextProvider>
+      </div>
     </>
   );
 }
