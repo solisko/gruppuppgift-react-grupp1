@@ -1,8 +1,8 @@
 import "./App.css";
 import AuctionContextProvider from "./Context/AuctionContextProvider";
 import { BrowserRouter } from "react-router-dom";
-import Navigation from "./Header/Navigation";
-import Switch from "./Header/Switch";
+import Navigation from "./components/Header/Navigation";
+import Switch from "./components/Header/Switch";
 import ListAuctions from "./components/ListAuctions/ListAuctions"
 
 function App() {
