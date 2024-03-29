@@ -43,7 +43,7 @@ export default function AddAuction() {
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">
+        <label htmlFor="title">Titel:
           <input
             type="text"
             placeholder="Skriv titel här..."
@@ -52,8 +52,8 @@ export default function AddAuction() {
             required
           />
         </label>
-        <label htmlFor="description">
-          <input
+        <label htmlFor="description">Beskrivning:
+          <textarea
             type="text"
             placeholder="Beskriv artikeln här..."
             value={description}
@@ -64,7 +64,7 @@ export default function AddAuction() {
         <label htmlFor="startDate">
           Starttid:
           <input
-            type="text"
+            type="datetime-local"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             required
@@ -73,7 +73,7 @@ export default function AddAuction() {
         <label htmlFor="endDate">
           Sluttid:
           <input
-            type="text"
+            type="datetime-local"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
