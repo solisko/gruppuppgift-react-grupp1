@@ -11,6 +11,34 @@ export default function AddAuction() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const auctionData = {
+      title,
+      description,
+      startDate,
+      endDate,
+      startingPrice,
+      createdBy,
+    };
+
+    try {
+      const response = await fetch(
+        "https://auctioneer.azurewebsites.net/auction/1zyx",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(auctionData),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      console.log("Auction created successfully!");
+    } catch (error) {
+      console.error("There was an error creating the auction:", error.message);
+    }
   };
   return (
     <div className={styles.formContainer}>
