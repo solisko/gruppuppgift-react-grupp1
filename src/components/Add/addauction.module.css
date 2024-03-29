@@ -1,0 +1,20 @@
+.formContainer{
+    background-color: bisque;
+    width: 600px;
+    padding: 10px;
+    height: fit-content;
+    margin:  auto;
+}
+input, textarea, button{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: none;
+}
+input[type=number]{
+    appearance: textfield;
+}
+button:hover{
+    background-color: beige;
+}
