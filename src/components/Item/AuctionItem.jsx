@@ -17,7 +17,8 @@ export default function AuctionItem({ auctions }) {
         auctions.map((auction, index) => (
           <div className={styles.auctionCard} key={index}>
             <h2>{auction.Title}</h2>
-            <p>{auction.Description}</p>
+            <img className={styles.image} src="" alt="" />
+            <h3>{auction.Description}</h3>
             <p>
               Starttid budgivning:
               <br />
