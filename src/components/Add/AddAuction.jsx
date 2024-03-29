@@ -16,30 +16,60 @@ export default function AddAuction() {
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">
-          <input type="text" placeholder="Skriv titel här..." value={title} />
+          <input
+            type="text"
+            placeholder="Skriv titel här..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
         </label>
         <label htmlFor="description">
           <input
             type="text"
             placeholder="Beskriv artikeln här..."
             value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
           />
         </label>
         <label htmlFor="startDate">
           Starttid:
-          <input type="text" value={startDate} />
+          <input
+            type="text"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            required
+          />
         </label>
         <label htmlFor="endDate">
           Sluttid:
-          <input type="text" value={endDate} />
+          <input
+            type="text"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            required
+          />
         </label>
         <label htmlFor="startprice">
           Start pris:
-          <input type="number" placeholder="Första budet blir..." value={startingPrice} />
+          <input
+            type="number"
+            placeholder="Första budet blir..."
+            value={startingPrice}
+            onChange={(e) => setStartingPrice(e.target.value)}
+            required
+          />
         </label>
         <label htmlFor="creator">
           Skapad av:
-          <input type="text" placeholder="Skriv ditt namn..." value={createdBy} />
+          <input
+            type="text"
+            placeholder="Skriv ditt namn..."
+            value={createdBy}
+            onChange={(e) => setCreatedBy(e.target.value)}
+            required
+          />
         </label>
         <button type="submit">Skapa auktion</button>
       </form>
