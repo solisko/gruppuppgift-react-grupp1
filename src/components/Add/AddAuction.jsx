@@ -35,15 +35,24 @@ export default function AddAuction() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+
       console.log("Auction created successfully!");
+      setTitle("");
+      setDescription("");
+      setStartDate("");
+      setEndDate("");
+      setStartingPrice("");
+      setCreatedBy("");
     } catch (error) {
       console.error("There was an error creating the auction:", error.message);
     }
   };
+
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Titel:
+        <label htmlFor="title">
+          Titel:
           <input
             type="text"
             placeholder="Skriv titel här..."
@@ -52,9 +61,9 @@ export default function AddAuction() {
             required
           />
         </label>
-        <label htmlFor="description">Beskrivning:
+        <label htmlFor="description">
+          Beskrivning:
           <textarea
-            type="text"
             placeholder="Beskriv artikeln här..."
             value={Description}
             onChange={(e) => setDescription(e.target.value)}
@@ -83,7 +92,7 @@ export default function AddAuction() {
           Start pris:
           <input
             type="number"
-            placeholder="Första budet blir..."
+            placeholder="Summa..."
             value={StartingPrice}
             onChange={(e) => setStartingPrice(e.target.value)}
             required
