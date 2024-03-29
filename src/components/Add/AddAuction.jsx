@@ -2,23 +2,23 @@ import { useState } from "react";
 import styles from "../Add/addauction.module.css";
 
 export default function AddAuction() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [startingPrice, setStartingPrice] = useState("");
-  const [createdBy, setCreatedBy] = useState("");
+  const [Title, setTitle] = useState("");
+  const [Description, setDescription] = useState("");
+  const [StartDate, setStartDate] = useState("");
+  const [EndDate, setEndDate] = useState("");
+  const [StartingPrice, setStartingPrice] = useState("");
+  const [CreatedBy, setCreatedBy] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const auctionData = {
-      title,
-      description,
-      startDate,
-      endDate,
-      startingPrice,
-      createdBy,
+      Title,
+      Description,
+      StartDate,
+      EndDate,
+      StartingPrice,
+      CreatedBy,
     };
 
     try {
@@ -47,7 +47,7 @@ export default function AddAuction() {
           <input
             type="text"
             placeholder="Skriv titel här..."
-            value={title}
+            value={Title}
             onChange={(e) => setTitle(e.target.value)}
             required
           />
@@ -56,7 +56,7 @@ export default function AddAuction() {
           <textarea
             type="text"
             placeholder="Beskriv artikeln här..."
-            value={description}
+            value={Description}
             onChange={(e) => setDescription(e.target.value)}
             required
           />
@@ -65,7 +65,7 @@ export default function AddAuction() {
           Starttid:
           <input
             type="datetime-local"
-            value={startDate}
+            value={StartDate}
             onChange={(e) => setStartDate(e.target.value)}
             required
           />
@@ -74,7 +74,7 @@ export default function AddAuction() {
           Sluttid:
           <input
             type="datetime-local"
-            value={endDate}
+            value={EndDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
           />
@@ -84,7 +84,7 @@ export default function AddAuction() {
           <input
             type="number"
             placeholder="Första budet blir..."
-            value={startingPrice}
+            value={StartingPrice}
             onChange={(e) => setStartingPrice(e.target.value)}
             required
           />
@@ -94,7 +94,7 @@ export default function AddAuction() {
           <input
             type="text"
             placeholder="Skriv ditt namn..."
-            value={createdBy}
+            value={CreatedBy}
             onChange={(e) => setCreatedBy(e.target.value)}
             required
           />
