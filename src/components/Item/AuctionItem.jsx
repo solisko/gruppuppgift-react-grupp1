@@ -11,28 +11,35 @@ const formatDateTime = (dateTimeStr) => {
 };
 
 export default function AuctionItem({ auctions }) {
+  const currentDateTime = new Date();
+
   return (
     <>
       {auctions.length ? (
-        auctions.map((auction, index) => (
-          <div className={styles.auctionCard} key={index}>
-            <h2>{auction.Title}</h2>
-            <img className={styles.image} src="" alt="" />
-            <h3>{auction.Description}</h3>
-            <p>
-              Starttid budgivning:
-              <br />
-              {formatDateTime(auction.StartDate)}
-            </p>
-            <p>
-              Sluttid budgivning:
-              <br />
-              {formatDateTime(auction.EndDate)}
-            </p>
-            <h3>Start pris: {auction.StartingPrice}</h3>
-            <p>Upplagd av {auction.CreatedBy}</p>
-          </div>
-        ))
+        auctions.map((auction, index) => {
+          const endDate = new Date(auction.EndDate);
+          const isEnded = endDate < currentDateTime;
+          return (
+            <div className={styles.auctionCard} key={index}>
+              <h2>{auction.Title}</h2>
+              <img className={styles.image} src="" alt="" />
+              <h3>{auction.Description}</h3>
+              <p>
+                Starttid budgivning:
+                <br />
+                {formatDateTime(auction.StartDate)}
+              </p>
+              <p>
+                Sluttid budgivning:
+                <br />
+                {formatDateTime(auction.EndDate)}
+              </p>
+              <h3>Start pris: {auction.StartingPrice}</h3>
+              {isEnded ? <p>Auktion avslutad</p> : <button>Lägg bud</button>}
+              <p>Upplagd av {auction.CreatedBy}</p>
+            </div>
+          );
+        })
       ) : (
         <div>Finns inga auktioner att visa.</div>
       )}

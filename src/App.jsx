@@ -3,7 +3,6 @@ import AuctionContextProvider from "./Context/AuctionContextProvider";
 import { BrowserRouter } from "react-router-dom";
 import Navigation from "./components/Header/Navigation";
 import Switch from "./components/Header/Switch";
-import ListAuctions from "./components/List/ListAuctions";
 
 function App() {
   return (
@@ -14,9 +13,6 @@ function App() {
             <Navigation />
             <Switch />
           </BrowserRouter>
-          <div className="mainContent" >
-            <ListAuctions />
-          </div>
         </AuctionContextProvider>
       </div>
     </>
