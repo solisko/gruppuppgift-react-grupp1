@@ -96,6 +96,7 @@ export default function AddAuction() {
           <input
             type="datetime-local"
             value={EndDate}
+            min={StartDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
           />

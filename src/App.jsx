@@ -15,7 +15,7 @@ function App() {
             <Switch />
           </BrowserRouter>
           <div className="mainContent" >
-            <ListAuctions />
+            {/* <ListAuctions /> */}
           </div>
         </AuctionContextProvider>
       </div>
