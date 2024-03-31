@@ -3,9 +3,3 @@
     box-sizing: border-box;
     font-family: Georgia, 'Times New Roman', Times, serif
 }
-
-.mainContent{
-    /* width: 1400px; */
-    max-width: 1500px;
-    margin: 0 auto;
-}
