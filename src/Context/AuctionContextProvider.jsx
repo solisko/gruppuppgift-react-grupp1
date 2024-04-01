@@ -5,24 +5,38 @@ export const AuctionContext = createContext();
 const AuctionProvider = (props) => {
   const [auctions, setAuctions] = useState([]);
 
-  useEffect(() => {
-    const fetchAuctions = async () => {
+  
+    const fetchAuctions = async (searchTerm = '') => {
       try {
         const response = await fetch(`https://auctioneer.azurewebsites.net/auction/1zyx`);
         if (!response.ok) {
           throw new Error("Failed to fetch auctions");
         }
-        const data = await response.json();
+        let data = await response.json();
+
+        
+
+        if(!searchTerm) {
+          const currentDatetime = new Date();
+          data = data.filter(auction => new Date(auction.EndDate) > currentDatetime);
+        }
+        
+        if (searchTerm) {
+          data = data.filter(auction => auction.Title.toLowerCase().includes(searchTerm.toLowerCase()));
+        }
+
         setAuctions(data);
       } catch (error) {
         console.error("Error fetching auctions", error);
       }
     };
-    fetchAuctions();
-  }, []);
+
+    useEffect(() => {
+      fetchAuctions();
+    },[]);
 
   return (
-    <AuctionContext.Provider value={{ auctions }}>
+    <AuctionContext.Provider value={{ auctions, fetchAuctions }}>
       {props.children}
     </AuctionContext.Provider>
   );
