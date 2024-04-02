@@ -4,7 +4,6 @@ import AuctionContextProvider from "./Context/AuctionContextProvider";
 import { BrowserRouter } from "react-router-dom";
 import Navigation from "./components/Header/Navigation";
 import Switch from "./components/Header/Switch";
-import ListAuctions from "./components/List/ListAuctions";
 import Footer from "./components/Footern/Footer";
 import SearchBar from "./components/Searchfield/SearchBar";
 
@@ -12,15 +11,15 @@ function App() {
   return (
     <>
       <div className="App">
-        <AuctionContextProvider> 
+        <AuctionContextProvider>
           <BrowserRouter>
             <Navigation />
-            <SearchBar/>
+            <SearchBar />
             <Switch />
           </BrowserRouter>
         </AuctionContextProvider>
+        <Footer />
       </div>
-      <Footer /> 
     </>
   );
 }
