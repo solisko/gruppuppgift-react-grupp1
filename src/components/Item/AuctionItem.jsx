@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "../Item/auctionitem.module.css";
 
 const formatDateTime = (dateTimeStr) => {
@@ -11,14 +12,14 @@ const formatDateTime = (dateTimeStr) => {
 };
 
 export default function AuctionItem({ auctions }) {
-  const currentDateTime = new Date();
+  // const currentDateTime = new Date();
 
   return (
     <>
       {auctions.length ? (
         auctions.map((auction, index) => {
-          const endDate = new Date(auction.EndDate);
-          const isEnded = endDate < currentDateTime;
+          // const endDate = new Date(auction.EndDate);
+          // const isEnded = endDate < currentDateTime;
           return (
             <div className={styles.auctionCard} key={index}>
               <h2>{auction.Title}</h2>
@@ -35,7 +36,7 @@ export default function AuctionItem({ auctions }) {
                 {formatDateTime(auction.EndDate)}
               </p>
               <h3>Start pris: {auction.StartingPrice}</h3>
-              {isEnded ? <p>Auktion avslutad</p> : <button>Lägg bud/Se detaljer</button>}
+              <NavLink to="/details">Lägg bud/Se detaljer</NavLink>
               <p>Upplagd av {auction.CreatedBy}</p>
             </div>
           );
