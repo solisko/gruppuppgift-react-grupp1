@@ -2,9 +2,9 @@ export default function ItemDetails() {
   return (
     <div>
       <div>
-        <h1>{auctionID.Title}</h1>
+        <h1>titel</h1>
         {/* <img className={styles.image} src="" alt="" /> */}
-        <h3>{auctionID.Description}</h3>
+        <h3>beskrivning</h3>
         {/* <p>
           Starttid budgivning:
           <br />
@@ -15,7 +15,7 @@ export default function ItemDetails() {
           <br />
           {formatDateTime(auction.EndDate)}
         </p> */}
-        <h3>Start pris: {auctionID.StartingPrice}</h3>
+        <h3>Start pris: 3099080</h3>
         <button>Lägg nytt bud</button>
         <section>
           <h2>Alla bud:</h2>
@@ -34,7 +34,7 @@ export default function ItemDetails() {
             </tbody>
           </table>
         </section>
-        <p>Upplagd av {auctionID.CreatedBy}</p>
+        <p>Upplagd av nisse_h</p>
       </div>
     </div>
   );
