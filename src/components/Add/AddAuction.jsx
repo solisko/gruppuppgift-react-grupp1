@@ -61,7 +61,7 @@ export default function AddAuction() {
 
   return (
     <div className={styles.formContainer}>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="title">
           Titel:
           <input

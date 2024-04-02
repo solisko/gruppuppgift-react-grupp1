@@ -35,7 +35,7 @@ export default function AuctionItem({ auctions }) {
                 {formatDateTime(auction.EndDate)}
               </p>
               <h3>Start pris: {auction.StartingPrice}</h3>
-              {isEnded ? <p>Auktion avslutad</p> : <button>Lägg bud</button>}
+              {isEnded ? <p>Auktion avslutad</p> : <button>Lägg bud/Se detaljer</button>}
               <p>Upplagd av {auction.CreatedBy}</p>
             </div>
           );

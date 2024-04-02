@@ -5,16 +5,16 @@
     height: fit-content;
     margin: 20px auto;
 }
-input, textarea, button{
+.form input, textarea, button{
     width: 100%;
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
     border: none;
 }
-input[type=number]{
+.form input[type=number]{
     appearance: textfield;
 }
-button:hover{
+.form button:hover{
     background-color: beige;
 }
