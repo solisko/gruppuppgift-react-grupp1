@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "../Item/auctionitem.module.css";
 
 const formatDateTime = (dateTimeStr) => {
@@ -13,6 +13,11 @@ const formatDateTime = (dateTimeStr) => {
 
 export default function AuctionItem({ auctions }) {
   const currentDateTime = new Date();
+  const navigate = useNavigate();
+
+  const goToDetails = (auctionId) => {
+    navigate("/details", { state: { id: auctionId } });
+  };
 
   return (
     <>
@@ -42,7 +47,9 @@ export default function AuctionItem({ auctions }) {
                   <button>Se detaljer</button>
                 </div>
               ) : (
-                <NavLink to="/details">Lägg bud/Se detaljer</NavLink>
+                <button onClick={() => goToDetails(auction.AuctionID)}>
+                  Lägg bud/Se detaljer
+                </button>
               )}
               <p>Upplagd av {auction.CreatedBy}</p>
             </div>
