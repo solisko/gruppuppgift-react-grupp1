@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "../Item/auctionitem.module.css";
 
 const formatDateTime = (dateTimeStr) => {
@@ -56,7 +56,7 @@ export default function AuctionItem({ auctions }) {
           );
         })
       ) : (
-        <div>Finns inga auktioner att visa.</div>
+        <div>Laddar auktioner...</div>
       )}
     </>
   );
