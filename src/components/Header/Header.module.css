@@ -14,15 +14,32 @@
     margin: 0 auto;
 }
 
-.navLinks {
+.navContainer {
     display: flex;
+}
+
+.navLinks li, .adminBtn {
     margin-right: 20px;
     color: white;
+    display: inline-block;
 }
 
 li {
     padding: 5px;
     list-style: none;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit; 
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 
@@ -30,3 +47,18 @@ li {
 body {
     margin: 0px;
 }
+
+/* 
+.adminBtn {
+    background-color: lightgrey;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.adminBtn:hover {
+    background-color: rgb(201, 201, 201);
+}
+ */
