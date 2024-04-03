@@ -4,9 +4,13 @@ export const AuctionContext = createContext();
 
 const AuctionProvider = (props) => {
   const [auctions, setAuctions] = useState([]);
+  const [bids, setBids] = useState([]);
 
-  const fetchAuctions = async (searchTerm = "") => {
+  const fetchAuctions = async (searchTerm = "", auctionId = "") => {
     let url = "https://auctioneer.azurewebsites.net/auction/1zyx";
+    if (auctionId) {
+      url += `/${auctionId}`;
+    }
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -33,12 +37,28 @@ const AuctionProvider = (props) => {
     }
   };
 
+  const fetchBidsByAuctionId = async (auctionId) => {
+    const url = `https://auctioneer.azurewebsites.net/bid/1zyx/${auctionId}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Failed to fetch bids");
+      }
+      const data = await response.json();
+      setBids(data);
+    } catch (error) {
+      console.error("Error fetching bids", error);
+    }
+  };
+
   useEffect(() => {
     fetchAuctions();
   }, []);
 
   return (
-    <AuctionContext.Provider value={{ auctions, fetchAuctions }}>
+    <AuctionContext.Provider
+      value={{ auctions, fetchAuctions, bids, fetchBidsByAuctionId }}
+    >
       {props.children}
     </AuctionContext.Provider>
   );
