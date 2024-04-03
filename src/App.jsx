@@ -6,6 +6,7 @@ import Navigation from "./components/Header/Navigation";
 import Switch from "./components/Header/Switch";
 import Footer from "./components/Footern/Footer";
 import SearchBar from "./components/Searchfield/SearchBar";
+import Admin from "./components/Admin/Admin";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <BrowserRouter>
             <Navigation />
             <SearchBar />
+            <Admin />
             <Switch />
           </BrowserRouter>
         </AuctionContextProvider>
