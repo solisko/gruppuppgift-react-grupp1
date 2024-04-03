@@ -5,7 +5,7 @@
     height: fit-content;
     margin: 20px auto;
 }
-.form input, textarea, button{
+.form input, textarea, .createBtn{
     width: 100%;
     padding: 10px;
     margin: 5px 0;
@@ -15,6 +15,7 @@
 .form input[type=number]{
     appearance: textfield;
 }
-.form button:hover{
+.createBtn:hover{
     background-color: beige;
+    outline: 1px inset black;
 }

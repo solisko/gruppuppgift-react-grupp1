@@ -1,0 +1,12 @@
+.detailsContainer{
+    margin: 10px auto;
+    padding: 10px;
+    max-width: 1000px;
+    height: fit-content;
+    background-color: bisque;
+}
+.image{
+    background-color: aliceblue;
+    width: 450px;
+    height: 400px;
+}
