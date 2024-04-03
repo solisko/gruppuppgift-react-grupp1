@@ -1,41 +1,57 @@
+import { useContext, useEffect } from "react";
+import { AuctionContext } from "../../Context/AuctionContextProvider";
+import { useLocation } from "react-router-dom";
+import styles from "../ItemDetails/itemdetails.module.css";
+import AddBid from "../Add/AddBid";
+
 export default function ItemDetails() {
+  const { auctions, bids, fetchBidsByAuctionId } = useContext(AuctionContext);
+  const location = useLocation();
+  const auction = auctions.filter(
+    (auct) => auct.AuctionID === location.state.id
+  )[0];
+
+  useEffect(() => {
+    if (auction) {
+      fetchBidsByAuctionId(auction.AuctionID);
+    }
+  }, [auction, fetchBidsByAuctionId]);
+
   return (
-    <div>
-      <div>
-        <h1>titel</h1>
-        {/* <img className={styles.image} src="" alt="" /> */}
-        <h3>beskrivning</h3>
-        {/* <p>
-          Starttid budgivning:
-          <br />
-          {formatDateTime(auction.StartDate)}
-        </p>
-        <p>
-          Sluttid budgivning:
-          <br />
-          {formatDateTime(auction.EndDate)}
-        </p> */}
-        <h3>Start pris: 3099080</h3>
-        <button>Lägg nytt bud</button>
-        <section>
-          <h2>Alla bud:</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Bud</th>
-                <th>Budgivare</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>300</td>
-                <td>Sofia</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-        <p>Upplagd av nisse_h</p>
-      </div>
-    </div>
+    <>
+      {auction && (
+        <div className={styles.detailsContainer}>
+          <img className={styles.image} src="" alt="" />
+          <h3>{auction.Description}</h3>
+          <section className={styles.bidsSection}>
+            <AddBid />
+            {bids && bids.length > 0 ? (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Bud</th>
+                    <th>Budgivare</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bids
+                    .slice()
+                    .reverse()
+                    .map((bid, index) => (
+                      <tr key={index}>
+                        <td>{bid.Amount}</td>
+                        <td>{bid.Bidder}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            ) : (
+              <h2>Inga Bud än</h2>
+            )}
+          </section>
+          <p>Upplagd av {auction.CreatedBy}</p>
+        </div>
+      )}
+    </>
   );
 }

@@ -121,7 +121,7 @@ export default function AddAuction() {
             required
           />
         </label>
-        <button type="submit">Skapa auktion</button>
+        <button className={styles.createBtn} type="submit">Skapa auktion</button>
       </form>
     </div>
   );
