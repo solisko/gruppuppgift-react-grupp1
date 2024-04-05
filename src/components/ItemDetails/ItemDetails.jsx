@@ -24,7 +24,7 @@ export default function ItemDetails() {
           <img className={styles.image} src="" alt="" />
           <h3>{auction.Description}</h3>
           <section className={styles.bidsSection}>
-            <AddBid />
+            <AddBid auction={auction} />
             {bids && bids.length > 0 ? (
               <table>
                 <thead>
