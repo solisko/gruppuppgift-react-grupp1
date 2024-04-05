@@ -1,4 +1,4 @@
-const AddBid = () => {
+const AddBid = ({auction}) => {
   return (
     <div>
         <input type="text" />
