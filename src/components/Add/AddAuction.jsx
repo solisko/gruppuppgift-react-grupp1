@@ -34,7 +34,7 @@ export default function AddAuction() {
 
     try {
       const response = await fetch(
-        "https://auctioneer.azurewebsites.net/auction/1zyx",
+        "https://auctioneer2.azurewebsites.net/auction/1zyx",
         {
           method: "POST",
           headers: {
