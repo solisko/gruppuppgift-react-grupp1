@@ -7,7 +7,7 @@ const AuctionProvider = (props) => {
   const [bids, setBids] = useState([]);
 
   const fetchAuctions = async (searchTerm = "") => {
-    let url = "https://auctioneer.azurewebsites.net/auction/1zyx";
+    let url = "https://auctioneer2.azurewebsites.net/auction/1zyx";
 
     try {
       const response = await fetch(url);
@@ -36,7 +36,7 @@ const AuctionProvider = (props) => {
   };
 
   const fetchBidsByAuctionId = async (auctionId) => {
-    const url = `https://auctioneer.azurewebsites.net/bid/1zyx/${auctionId}`;
+    const url = `https://auctioneer2.azurewebsites.net/bid/1zyx/${auctionId}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
