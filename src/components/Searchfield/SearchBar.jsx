@@ -1,13 +1,16 @@
 import { useState, useContext } from 'react';
 import { AuctionContext } from '../../Context/AuctionContextProvider';
+import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
+    const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const { fetchAuctions} = useContext(AuctionContext);
 
     const handleSearch = (e) => {
         e.preventDefault();
         fetchAuctions(searchTerm);
+        navigate('/searchresults');
 
     };
 
