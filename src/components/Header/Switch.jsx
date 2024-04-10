@@ -4,7 +4,7 @@ import AddAuction from "../Add/AddAuction"
 import ListAuctions from '../List/ListAuctions';
 import ItemDetails from '../ItemDetails/ItemDetails';
 import Admin from '../Admin/Admin';
-import SearchResults from '../Searchfield/SearchResults';
+import SearchResults from '../Search/SearchResults';
 
 
 // För att se om länkarna fungerar, ska sedan läggas in i egna pages-komponenter
