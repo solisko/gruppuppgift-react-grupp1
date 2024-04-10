@@ -10,7 +10,7 @@ function AuctionRow(props) {
     
     const getAuctionDetails = () => {
 
-        fetch('https://auctioneer.azurewebsites.net/bid/1zyx/' + auction.AuctionID)
+        fetch('https://auctioneer2.azurewebsites.net/bid/1zyx/' + auction.AuctionID)
         .then((response) => response.json())
         .then((result) => {
             setBids(result)

@@ -1,24 +1,15 @@
-import { useState, useEffect } from 'react';
 import styles from './Admin.module.css';
 import AuctionRow from './AuctionRow';
-import OffAuctions from './OffAuctions';
+import React, { useContext } from 'react';
+import { AuctionContext } from '../../Context/AuctionContextProvider';
 
 function Admin() {
+    const { auction } = useContext(AuctionContext);
 
-    const [auctionsData, setAuctionsData] = useState([])
-    useEffect(() => getAuctions(),[]);
-
-    const getAuctions = () => {
-
-        fetch('https://auctioneer.azurewebsites.net/auction/1zyx')
-        .then((response) => response.json())
-        .then((result) => {
-            setAuctionsData(result)
-        })
-        .catch(error => console.error('Det gick inte att hämta auktioner'));
-    }
-    
-
+    if (!auction) {
+        return <div>Hittar inga auktioner...</div>;
+      }
+      console.log(auction);
     return(
         <div className={styles.table}>
             <h3>Aktuella auktioner</h3>
@@ -32,7 +23,7 @@ function Admin() {
                 </thead>
                 <tbody>
                     {
-                        auctionsData.filter((auction) => {
+                        auction.filter((auction) => {
                             const endDate = new Date(auction.EndDate)
                             const today = new Date()
                             return(
@@ -56,7 +47,7 @@ function Admin() {
                 </thead>
                 <tbody>
                     {
-                        auctionsData.filter((auction) => {
+                        auction.filter((auction) => {
                             const endDate = new Date(auction.EndDate)
                             const today = new Date()
                             return(
