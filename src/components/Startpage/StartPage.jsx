@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import { AuctionContext } from '../../Context/AuctionContextProvider';
-import AuctionItem from '../Item/AuctionItem'; // Uppdatera sökvägen vid behov
+import AuctionItem from '../Item/AuctionItem'; 
+
 
 const StartPage = () => {
   const { auctions, fetchAuctions } = useContext(AuctionContext);
 
   useEffect(() => {
-    fetchAuctions(); // Kör detta när komponenten monteras
-  }, []); // Tomma beroenden innebär att effekten bara körs en gång
+    fetchAuctions(); 
+  }, []); 
 
   return (
     <div>

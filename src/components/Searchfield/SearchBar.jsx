@@ -1,9 +1,8 @@
 import { useState, useContext } from 'react';
 import { AuctionContext } from '../../Context/AuctionContextProvider';
 import { useNavigate } from 'react-router-dom';
-
-function SearchBar() {
-    const navigate = useNavigate();
+function SearchBar() 
+    { const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState('');
     const { fetchAuctions} = useContext(AuctionContext);
 
@@ -11,7 +10,6 @@ function SearchBar() {
         e.preventDefault();
         fetchAuctions(searchTerm);
         navigate('/searchresults');
-
     };
 
     return (
