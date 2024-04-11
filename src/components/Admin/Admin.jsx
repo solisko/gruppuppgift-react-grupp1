@@ -1,68 +1,69 @@
-import styles from './Admin.module.css';
-import AuctionRow from './AuctionRow';
-import React, { useContext } from 'react';
-import { AuctionContext } from '../../Context/AuctionContextProvider';
+import { useContext, useEffect, useState } from "react";
+import { AuctionContext } from "../../Context/AuctionContextProvider";
+import styles from "./admin.module.css";
 
 function Admin() {
-    const { auction } = useContext(AuctionContext);
+ const { auctions, fetchAuctions, bids, fetchBidsByAuctionId } = useContext(AuctionContext);
+ const [activeAuctions, setActiveAuctions] = useState([]);
+ const [closedAuctions, setClosedAuctions] = useState([]);
 
-    if (!auction) {
-        return <div>Hittar inga auktioner...</div>;
-      }
-      console.log(auction);
-    return(
-        <div className={styles.table}>
-            <h3>Aktuella auktioner</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Auktioner</th>
-                        <th>Nuvarande bud</th>
-                        <th>Slutdatum</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        auction.filter((auction) => {
-                            const endDate = new Date(auction.EndDate)
-                            const today = new Date()
-                            return(
-                                endDate > today
-                            )
-                        }).map((auction) => {
-                            
-                            return(
-                            <AuctionRow key={auction.AuctionID} auction={auction} />
-                        )})
-                    }
-                </tbody>
-            </table>
-            <h3>Avslutade auktioner</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Auktioner</th>
-                        <th>Slutpris</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        auction.filter((auction) => {
-                            const endDate = new Date(auction.EndDate)
-                            const today = new Date()
-                            return(
-                                endDate < today
-                            )
-                        }).map((auction) => {
-                            
-                            return(
-                            <AuctionRow key={auction.AuctionID} auction={auction} />
-                        )})
-                    }
-                </tbody>
-            </table>
-        </div>
-    );
+//  nu kan vi fixa så att den bara visar de som saknar bud, både öppna å stängda, 
+// å sen göra så att radera knappen funkar
+
+ useEffect(() => {
+    fetchAuctions("", true).then(() => {
+      const currentDatetime = new Date();
+      const active = auctions.filter(auction => new Date(auction.EndDate) > currentDatetime);
+      const closed = auctions.filter(auction => new Date(auction.EndDate) <= currentDatetime);
+      setActiveAuctions(active);
+      setClosedAuctions(closed);
+    });
+ }, [auctions, fetchAuctions]);
+
+ return (
+    <div className={styles.table}>
+      <h3>Öppna auktioner</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Titel</th>
+            <th>Bud</th>
+            <th>Slutdatum</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {activeAuctions.map((auction, index) => (
+            <tr key={index}>
+              <td>{auction.Title}</td>
+              <td>Saknar bud</td>
+              <td>{auction.EndDate}</td>
+              <td><button>Radera</button></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h3>Avslutade auktioner</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Titel</th>
+            <th>Slutpris</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {closedAuctions.map((auction, index) => (
+            <tr key={index}>
+              <td>{auction.Title}</td>
+              <td>Avlsutades utan några bud</td>
+              <td><button>Radera</button></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+ );
 }
 
 export default Admin;

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import { AuctionContext } from '../../Context/AuctionContextProvider';
-import AuctionItem from '../Item/AuctionItem';
+import React, { useContext } from "react";
+import { AuctionContext } from "../../Context/AuctionContextProvider";
+import AuctionItem from "../Item/AuctionItem";
 
 const SearchResults = () => {
   const { auctions } = useContext(AuctionContext);
