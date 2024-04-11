@@ -12,6 +12,7 @@ export default function ItemDetails() {
   )[0];
 
   const [isEnded, setIsEnded] = useState(false);
+  const [winningBid, setWinningBid] = useState("");
 
   useEffect(() => {
     if (auction) {
@@ -21,6 +22,14 @@ export default function ItemDetails() {
     }
   }, [auction, fetchBidsByAuctionId]);
 
+  useEffect(() => {
+    if (bids && bids.length > 0) {
+      const winningBid = bids.reduce((prev, current) =>
+        prev.Amount > current.Amount ? prev : current
+      );
+      setWinningBid(winningBid);
+    }
+  }, [bids]);
 
   return (
     <>
@@ -28,8 +37,19 @@ export default function ItemDetails() {
         <div className={styles.detailsContainer}>
           <img className={styles.image} src="" alt="" />
           <h3>{auction.Description}</h3>
+          <p>Upplagd av {auction.CreatedBy}</p>
           {isEnded ? (
-            <p>Auktionen är avslutad</p>
+            <>
+              <h2>Auktionen är avslutad.</h2>
+              {winningBid ? (
+                <p>
+                  Vinnande budet var {winningBid.Amount} kr av{" "}
+                  {winningBid.Bidder}
+                </p>
+              ) : (
+                <p>Auktionen är avslutad utan några bud.</p>
+              )}
+            </>
           ) : (
             <section className={styles.bidsSection}>
               <AddBid auction={auction} />
@@ -58,7 +78,6 @@ export default function ItemDetails() {
               )}
             </section>
           )}
-          <p>Upplagd av {auction.CreatedBy}</p>
         </div>
       )}
     </>

@@ -6,7 +6,7 @@ const AuctionProvider = (props) => {
   const [auctions, setAuctions] = useState([]);
   const [bids, setBids] = useState([]);
 
-  const fetchAuctions = async (searchTerm = "") => {
+  const fetchAuctions = async (searchTerm = "", includeEnded = false) => {
     let url = "https://auctioneer2.azurewebsites.net/auction/1zyx";
 
     try {
@@ -16,7 +16,7 @@ const AuctionProvider = (props) => {
       }
       let data = await response.json();
 
-      if (!searchTerm) {
+      if (!includeEnded) {
         const currentDatetime = new Date();
         data = data.filter(
           (auction) => new Date(auction.EndDate) > currentDatetime
