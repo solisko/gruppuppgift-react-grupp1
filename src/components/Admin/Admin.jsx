@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { AuctionContext } from "../../Context/AuctionContextProvider";
-import styles from "./Admin.module.css";
+import styles from "./admin.module.css";
 
 function Admin() {
  const { auctions, fetchAuctions, bids, fetchBidsByAuctionId } = useContext(AuctionContext);
  const [activeAuctions, setActiveAuctions] = useState([]);
  const [closedAuctions, setClosedAuctions] = useState([]);
+
+//  nu kan vi fixa så att den bara visar de som saknar bud, både öppna å stängda, 
+// å sen göra så att radera knappen funkar
 
  useEffect(() => {
     fetchAuctions("", true).then(() => {
