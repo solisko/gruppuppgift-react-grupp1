@@ -35,6 +35,7 @@ export default function ItemDetails() {
     <>
       {auction && (
         <div className={styles.detailsContainer}>
+          <button onClick={() => window.history.back()}>Tillbaka</button>
           <img className={styles.image} src="" alt="" />
           <h3>{auction.Description}</h3>
           <p>Upplagd av {auction.CreatedBy}</p>
