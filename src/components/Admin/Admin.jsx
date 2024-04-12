@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuctionContext } from "../../Context/AuctionContextProvider";
-import styles from "./admin.module.css";
+import styles from "./Admin.module.css";
 
 function Admin() {
  const { auctions, fetchAuctions, bids, fetchBidsByAuctionId } = useContext(AuctionContext);
