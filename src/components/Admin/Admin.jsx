@@ -1,24 +1,28 @@
 import { useContext, useEffect, useState } from "react";
 import { AuctionContext } from "../../Context/AuctionContextProvider";
-import styles from "./admin.module.css";
+import styles from "./Admin.module.css";
 
 function Admin() {
- const { auctions, fetchAuctions, bids, fetchBidsByAuctionId } = useContext(AuctionContext);
+ const { auctions, bids, fetchBidsByAuctionId, deleteAuction } = useContext(AuctionContext);
  const [activeAuctions, setActiveAuctions] = useState([]);
  const [closedAuctions, setClosedAuctions] = useState([]);
 
-//  nu kan vi fixa så att den bara visar de som saknar bud, både öppna å stängda, 
-// å sen göra så att radera knappen funkar
 
  useEffect(() => {
-    fetchAuctions("", true).then(() => {
       const currentDatetime = new Date();
       const active = auctions.filter(auction => new Date(auction.EndDate) > currentDatetime);
       const closed = auctions.filter(auction => new Date(auction.EndDate) <= currentDatetime);
       setActiveAuctions(active);
       setClosedAuctions(closed);
-    });
- }, [auctions, fetchAuctions]);
+ }, [auctions]);
+
+ async function handleDelete(auction) {
+  try {
+    await deleteAuction(auction);
+  } catch (error) {
+    console.error('Error deleting auction', error);
+  }
+ }
 
  return (
     <div className={styles.table}>
@@ -34,11 +38,11 @@ function Admin() {
         </thead>
         <tbody>
           {activeAuctions.map((auction, index) => (
-            <tr key={index}>
+            <tr key={auction.AuctionID}>
               <td>{auction.Title}</td>
               <td>Saknar bud</td>
               <td>{auction.EndDate}</td>
-              <td><button>Radera</button></td>
+              <td><button onClick={() => handleDelete(auction)}>Radera</button></td>
             </tr>
           ))}
         </tbody>

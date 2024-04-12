@@ -49,13 +49,33 @@ const AuctionProvider = (props) => {
     }
   };
 
+  const deleteAuction = async (auction) => {
+    const url = `https://auctioneer2.azurewebsites.net/auction/1zyx/${auction.AuctionID}`;
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        body: JSON.stringify({
+          GroupCode: '1zyx', 
+          AuctionID: auction.AuctionID
+
+        })
+      });
+      if (!response.ok) {
+        throw new Error('Failed to remove auction');
+      }
+      fetchAuctions();
+    } catch (error) {
+      console.error('Error remove auction', error);
+    }
+  }
+
   useEffect(() => {
     fetchAuctions();
   }, []);
 
   return (
     <AuctionContext.Provider
-      value={{ auctions, fetchAuctions, bids, fetchBidsByAuctionId }}
+      value={{ auctions, fetchAuctions, bids, fetchBidsByAuctionId, deleteAuction }}
     >
       {props.children}
     </AuctionContext.Provider>
