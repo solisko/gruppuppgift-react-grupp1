@@ -5,6 +5,7 @@ export const AuctionContext = createContext();
 const AuctionProvider = (props) => {
   const [auctions, setAuctions] = useState([]);
   const [bids, setBids] = useState([]);
+  const [auctionDetails, setAuctionDetails] = useState(null);
 
   const fetchAuctions = async (searchTerm = "", includeEnded = false) => {
     let url = "https://auctioneer2.azurewebsites.net/auction/1zyx";
@@ -35,6 +36,20 @@ const AuctionProvider = (props) => {
     }
   };
 
+  const fetchAuctionById = async (auctionId) => {
+    const url = `https://auctioneer2.azurewebsites.net/auction/1zyx/${auctionId}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw Error("Failed to fetch auction details");
+      }
+      const data = await response.json();
+      setAuctionDetails(data);
+    } catch (error) {
+      console.error("Error fetching auction details", error);
+    }
+  };
+
   const fetchBidsByAuctionId = async (auctionId) => {
     const url = `https://auctioneer2.azurewebsites.net/bid/1zyx/${auctionId}`;
     try {
@@ -49,33 +64,20 @@ const AuctionProvider = (props) => {
     }
   };
 
-  const deleteAuction = async (auction) => {
-    const url = `https://auctioneer2.azurewebsites.net/auction/1zyx/${auction.AuctionID}`;
-    try {
-      const response = await fetch(url, {
-        method: 'DELETE',
-        body: JSON.stringify({
-          GroupCode: '1zyx', 
-          AuctionID: auction.AuctionID
-
-        })
-      });
-      if (!response.ok) {
-        throw new Error('Failed to remove auction');
-      }
-      fetchAuctions();
-    } catch (error) {
-      console.error('Error remove auction', error);
-    }
-  }
-
   useEffect(() => {
     fetchAuctions();
   }, []);
 
   return (
     <AuctionContext.Provider
-      value={{ auctions, fetchAuctions, bids, fetchBidsByAuctionId, deleteAuction }}
+      value={{
+        auctions,
+        fetchAuctions,
+        bids,
+        fetchBidsByAuctionId,
+        fetchAuctionById,
+        auctionDetails,
+      }}
     >
       {props.children}
     </AuctionContext.Provider>
@@ -83,3 +85,4 @@ const AuctionProvider = (props) => {
 };
 
 export default AuctionProvider;
+
