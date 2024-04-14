@@ -1,35 +1,54 @@
 import { useContext, useEffect, useState } from "react";
 import { AuctionContext } from "../../Context/AuctionContextProvider";
-import styles from "./Admin.module.css";
+import styles from "./admin.module.css";
 import AuctionDetails from "./AuctionDetails";
 
 function Admin() {
- const { auctions, fetchAuctions, bids, fetchBidsByAuctionId, deleteAuction } = useContext(AuctionContext);
- const [activeAuctions, setActiveAuctions] = useState([]);
- const [closedAuctions, setClosedAuctions] = useState([]);
+  const { auctions, fetchAuctions, bids, fetchBidsByAuctionId } =
+    useContext(AuctionContext);
+  const [activeAuctions, setActiveAuctions] = useState([]);
+  const [closedAuctions, setClosedAuctions] = useState([]);
 
+  useEffect(() => {
+    fetchAuctions("", true);
+  }, []);
 
- useEffect(() => {
-      //TODO Behöver uppdatera auctions med includeEnded = true
-      // fetchAuctions('', true);
-      const currentDatetime = new Date();
-      const active = auctions.filter(auction => new Date(auction.EndDate) > currentDatetime);
-      const closed = auctions.filter(auction => new Date(auction.EndDate) <= currentDatetime);
-      setActiveAuctions(active);
-      setClosedAuctions(closed);
- }, [auctions]);
+  useEffect(() => {
+    //TODO Behöver uppdatera auctions med includeEnded = true
+    // fetchAuctions('', true);
+    const currentDatetime = new Date();
+    const active = auctions.filter(
+      (auction) => new Date(auction.EndDate) > currentDatetime
+    );
+    const closed = auctions.filter(
+      (auction) => new Date(auction.EndDate) <= currentDatetime
+    );
+    setActiveAuctions(active);
+    setClosedAuctions(closed);
+  }, [auctions]);
 
- async function handleDelete(auction) {
-  try {
-    await deleteAuction(auction);
-  } catch (error) {
-    console.error('Error deleting auction', error);
-  }
- }
+  const handleDelete = async (auction) => {
+    const url = `https://auctioneer2.azurewebsites.net/auction/1zyx/${auction.AuctionID}`;
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        body: JSON.stringify({
+          GroupCode: "1zyx",
+          AuctionID: auction.AuctionID,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to remove auction");
+      }
+      fetchAuctions();
+    } catch (error) {
+      console.error("Error remove auction", error);
+    }
+  };
 
- return (
+  return (
     <div className={styles.table}>
-      <button onClick={() => fetchAuctions('', true)}>Uppdatera</button>
+      {/* <button onClick={() => fetchAuctions("", true)}>Uppdatera</button> */}
       <h3>Öppna auktioner</h3>
       <table>
         <thead>
@@ -37,15 +56,16 @@ function Admin() {
             <th>Titel</th>
             <th>Bud</th>
             <th>Slutdatum</th>
-            <th></th>
+            <th>Radera</th>
           </tr>
         </thead>
         <tbody>
           {activeAuctions.map((auction) => (
-            <AuctionDetails 
+            <AuctionDetails
               key={auction.AuctionID}
               handleDelete={() => handleDelete(auction)}
-              auction={auction} />
+              auction={auction}
+            />
           ))}
         </tbody>
       </table>
@@ -55,21 +75,23 @@ function Admin() {
           <tr>
             <th>Titel</th>
             <th>Slutpris</th>
-            <th></th>
+            <th>Radera</th>
           </tr>
         </thead>
         <tbody>
           {closedAuctions.map((auction, index) => (
             <tr key={index}>
               <td>{auction.Title}</td>
-              <td>Avlsutades utan några bud</td>
-              <td><button>Radera</button></td>
+              <td></td>
+              <td>
+                <button onClick={() => handleDelete(auction)}>Radera</button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
- );
+  );
 }
 
 export default Admin;
