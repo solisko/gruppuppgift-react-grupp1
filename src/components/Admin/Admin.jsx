@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { AuctionContext } from "../../Context/AuctionContextProvider";
 import styles from "./Admin.module.css";
+import AuctionDetails from "./AuctionDetails";
 
 function Admin() {
- const { auctions, bids, fetchBidsByAuctionId, deleteAuction } = useContext(AuctionContext);
+ const { auctions, fetchAuctions, bids, fetchBidsByAuctionId, deleteAuction } = useContext(AuctionContext);
  const [activeAuctions, setActiveAuctions] = useState([]);
  const [closedAuctions, setClosedAuctions] = useState([]);
 
 
  useEffect(() => {
+      //TODO Behöver uppdatera auctions med includeEnded = true
+      // fetchAuctions('', true);
       const currentDatetime = new Date();
       const active = auctions.filter(auction => new Date(auction.EndDate) > currentDatetime);
       const closed = auctions.filter(auction => new Date(auction.EndDate) <= currentDatetime);
@@ -26,6 +29,7 @@ function Admin() {
 
  return (
     <div className={styles.table}>
+      <button onClick={() => fetchAuctions('', true)}>Uppdatera</button>
       <h3>Öppna auktioner</h3>
       <table>
         <thead>
@@ -37,13 +41,11 @@ function Admin() {
           </tr>
         </thead>
         <tbody>
-          {activeAuctions.map((auction, index) => (
-            <tr key={auction.AuctionID}>
-              <td>{auction.Title}</td>
-              <td>Saknar bud</td>
-              <td>{auction.EndDate}</td>
-              <td><button onClick={() => handleDelete(auction)}>Radera</button></td>
-            </tr>
+          {activeAuctions.map((auction) => (
+            <AuctionDetails 
+              key={auction.AuctionID}
+              handleDelete={() => handleDelete(auction)}
+              auction={auction} />
           ))}
         </tbody>
       </table>
