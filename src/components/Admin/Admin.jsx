@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuctionContext } from "../../Context/AuctionContextProvider";
 import styles from "./admin.module.css";
-import AuctionDetails from "./AuctionDetails";
 
 function Admin() {
   const { auctions, fetchAuctions, bids, fetchBidsByAuctionId } =
@@ -14,8 +13,6 @@ function Admin() {
   }, []);
 
   useEffect(() => {
-    //TODO Behöver uppdatera auctions med includeEnded = true
-    // fetchAuctions('', true);
     const currentDatetime = new Date();
     const active = auctions.filter(
       (auction) => new Date(auction.EndDate) > currentDatetime
@@ -25,7 +22,25 @@ function Admin() {
     );
     setActiveAuctions(active);
     setClosedAuctions(closed);
+
+    active.forEach((auction) => {
+      fetchBidsByAuctionId(auction.AuctionID);
+    });
+
+    closed.forEach((auction) => {
+      fetchBidsByAuctionId(auction.AuctionID);
+    });
   }, [auctions]);
+
+  const hasBids = (auction) => {
+    console.log("Auction ID:", auction.AuctionID);
+    console.log("Bids:", bids);
+    const auctionBids = bids.filter(
+      (bid) => bid.AuctionID === auction.AuctionID
+    );
+    console.log("Auction Bids:", auctionBids);
+    return auctionBids.length > 0;
+  };
 
   const handleDelete = async (auction) => {
     const url = `https://auctioneer2.azurewebsites.net/auction/1zyx/${auction.AuctionID}`;
@@ -48,7 +63,6 @@ function Admin() {
 
   return (
     <div className={styles.table}>
-      {/* <button onClick={() => fetchAuctions("", true)}>Uppdatera</button> */}
       <h3>Öppna auktioner</h3>
       <table>
         <thead>
@@ -61,11 +75,18 @@ function Admin() {
         </thead>
         <tbody>
           {activeAuctions.map((auction) => (
-            <AuctionDetails
-              key={auction.AuctionID}
-              handleDelete={() => handleDelete(auction)}
-              auction={auction}
-            />
+            <tr key={auction.AuctionID}>
+              <td>{auction.Title}</td>
+              <td>{hasBids(auction) ? "Har bud" : "Inga bud"}</td>
+              <td>{new Date(auction.EndDate).toLocaleDateString("sv-SE")}</td>
+              <td>
+                {hasBids(auction) ? (
+                  <button disabled>Radera</button>
+                ) : (
+                  <button onClick={() => handleDelete(auction)}>Radera</button>
+                )}
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
@@ -74,17 +95,23 @@ function Admin() {
         <thead>
           <tr>
             <th>Titel</th>
+            <th></th>
             <th>Slutpris</th>
             <th>Radera</th>
           </tr>
         </thead>
         <tbody>
-          {closedAuctions.map((auction, index) => (
-            <tr key={index}>
+          {closedAuctions.map((auction) => (
+            <tr key={auction.AuctionID}>
               <td>{auction.Title}</td>
-              <td></td>
+              <td>{hasBids(auction) ? "Har bud" : "Inga bud"}</td>
+              <td>{new Date(auction.EndDate).toLocaleDateString("sv-SE")}</td>
               <td>
-                <button onClick={() => handleDelete(auction)}>Radera</button>
+                {hasBids(auction) ? (
+                  <button disabled>Radera</button>
+                ) : (
+                  <button onClick={() => handleDelete(auction)}>Radera</button>
+                )}
               </td>
             </tr>
           ))}
