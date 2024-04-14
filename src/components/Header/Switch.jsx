@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import StartPage from '../Startpage/StartPage';
 import AddAuction from "../Add/AddAuction"
-import ListAuctions from '../List/ListAuctions';
 import ItemDetails from '../ItemDetails/ItemDetails';
 import Admin from '../Admin/Admin';
 import SearchResults from '../Search/SearchResults';
