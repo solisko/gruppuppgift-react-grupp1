@@ -5,14 +5,19 @@ import styles from "../ItemDetails/itemdetails.module.css";
 import AddBid from "../Add/AddBid";
 
 export default function ItemDetails() {
-  const { auctions, bids, fetchBidsByAuctionId } = useContext(AuctionContext);
+  const {
+    auctions,
+    bids,
+    fetchBidsByAuctionId,
+    fetchAuctionById,
+    auctionDetails,
+  } = useContext(AuctionContext);
   const location = useLocation();
-  const auction = auctions.filter(
-    (auct) => auct.AuctionID === location.state.id
-  )[0];
+  const auctionId = location.state.id;
+  const auction = auctions.find((auct) => auct.AuctionID === auctionId);
 
   const [isEnded, setIsEnded] = useState(false);
-  const [winningBid, setWinningBid] = useState("");
+  const [winningBid, setWinningBid] = useState(null);
 
   useEffect(() => {
     if (auction) {
@@ -30,6 +35,19 @@ export default function ItemDetails() {
       setWinningBid(winningBid);
     }
   }, [bids]);
+
+  useEffect(() => {
+    if (auctionId) {
+      fetchAuctionById(auctionId);
+    }
+  }, [auctionId]);
+
+  useEffect(() => {
+    if (auctionDetails) {
+      const endDate = new Date(auctionDetails.EndDate);
+      setIsEnded(endDate < new Date());
+    }
+  }, [auctionDetails]);
 
   return (
     <>
