@@ -15,13 +15,14 @@ export default function ItemDetails() {
     if (auction) {
       fetchBidsByAuctionId(auction.AuctionID);
     }
-  }, [auction, fetchBidsByAuctionId]);
+  }, [auction]);
 
   return (
     <>
       {auction && (
         <div className={styles.detailsContainer}>
           <img className={styles.image} src="" alt="" />
+          <h2>{auction.Title}</h2>
           <h3>{auction.Description}</h3>
           <section className={styles.bidsSection}>
             <AddBid auction={auction} />
