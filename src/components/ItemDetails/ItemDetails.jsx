@@ -25,7 +25,7 @@ export default function ItemDetails() {
       const endDate = new Date(auction.EndDate);
       setIsEnded(endDate < new Date());
     }
-  }, [auction, fetchBidsByAuctionId]);
+  }, [auction]);
 
   useEffect(() => {
     if (bids && bids.length > 0) {
@@ -64,6 +64,10 @@ export default function ItemDetails() {
     }
   };
 
+  const handleBidAdded = () => {
+    fetchBidsByAuctionId(auctionId);
+  };
+
   return (
     <>
       {auction && (
@@ -91,7 +95,7 @@ export default function ItemDetails() {
             </>
           ) : (
             <section className={styles.bidsSection}>
-              <AddBid auction={auction} />
+              <AddBid auction={auction} auctionId={auction.AuctionID} onBidAdded={handleBidAdded}/>
               {bids && bids.length > 0 ? (
                 <table>
                   <thead>
