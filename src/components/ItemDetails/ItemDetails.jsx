@@ -85,6 +85,7 @@ export default function ItemDetails() {
     }
   }, [auction]);
 
+<<<<<<<<< Temporary merge branch 1
   useEffect(() => {
     if (bids && bids.length > 0) {
       const winningBid = bids.reduce((prev, current) =>
@@ -126,6 +127,8 @@ export default function ItemDetails() {
     fetchBidsByAuctionId(auctionId);
   };
 
+=========
+>>>>>>>>> Temporary merge branch 2
   return (
     <>
       {auction && (
@@ -135,6 +138,7 @@ export default function ItemDetails() {
           <h2>{auction.Title}</h2>
           <h3>{auction.Description}</h3>
           <p>Upplagd av {auction.CreatedBy}</p>
+<<<<<<<<< Temporary merge branch 1
           <h3>Start pris: {auction.StartingPrice} SEK</h3>
           {isEnded ? (
             <>
@@ -190,6 +194,8 @@ export default function ItemDetails() {
               )}
             </section>
           )}
+=========
+>>>>>>>>> Temporary merge branch 2
         </div>
       )}
     </>
