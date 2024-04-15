@@ -10,7 +10,6 @@ const Navigation = () => {
                 <ul className= {styles.navLinks}>
                     <li><NavLink to="/">Hem</NavLink></li>
                     <li><NavLink to="/create">Skapa auktion</NavLink></li>
-                    <li><NavLink to="/admin">Admin</NavLink></li>
                 </ul>
             </div>
         </nav>

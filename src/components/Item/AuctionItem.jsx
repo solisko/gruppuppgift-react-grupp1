@@ -43,7 +43,7 @@ export default function AuctionItem({ auction }) {
       {isEnded ? (
         <div>
           <p>Auktion avslutad</p>
-          <button >Se detaljer</button>
+          <button onClick={() => goToDetails(auction.AuctionID)}>Se detaljer</button>
         </div>
       ) : (
         <button onClick={() => goToDetails(auction.AuctionID)}>Lägg bud/Se detaljer</button>
