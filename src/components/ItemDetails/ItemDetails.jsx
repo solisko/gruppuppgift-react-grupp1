@@ -98,8 +98,8 @@ export default function ItemDetails() {
           ) : (
             <section className={styles.bidsSection}>
               <AddBid
-                auction={auction}
                 auctionId={auction.AuctionID}
+                startingPrice={auction.StartingPrice}
                 onBidAdded={handleBidAdded}
               />
               {bids && bids.length > 0 ? (
