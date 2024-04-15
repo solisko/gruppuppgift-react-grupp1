@@ -49,6 +49,21 @@ export default function ItemDetails() {
     }
   }, [auctionDetails]);
 
+  const handleDelete = async (auctionId) => {
+    const url = `https://auctioneer2.azurewebsites.net/auction/1zyx/${auctionId}`;
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to remove auction");
+      }
+      window.history.back();
+    } catch (error) {
+      console.error("Error remove auction", error);
+    }
+  };
+
   return (
     <>
       {auction && (
@@ -66,7 +81,12 @@ export default function ItemDetails() {
                   {winningBid.Bidder}
                 </p>
               ) : (
-                <p>Auktionen är avslutad utan några bud.</p>
+                <>
+                  <p>Auktionen är avslutad utan några bud.</p>
+                  <button onClick={() => handleDelete(auction.AuctionID)}>
+                    Radera
+                  </button>
+                </>
               )}
             </>
           ) : (
@@ -93,7 +113,12 @@ export default function ItemDetails() {
                   </tbody>
                 </table>
               ) : (
-                <h2>Inga Bud än</h2>
+                <>
+                  <h2>Inga Bud än</h2>
+                  <button onClick={() => handleDelete(auction.AuctionID)}>
+                    Radera
+                  </button>
+                </>
               )}
             </section>
           )}
