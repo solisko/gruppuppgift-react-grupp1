@@ -74,8 +74,10 @@ export default function ItemDetails() {
         <div className={styles.detailsContainer}>
           <button onClick={() => window.history.back()}>Tillbaka</button>
           <img className={styles.image} src="" alt="" />
+          <h2>{auction.Title}</h2>
           <h3>{auction.Description}</h3>
           <p>Upplagd av {auction.CreatedBy}</p>
+          <h3>Start pris: {auction.StartingPrice} SEK</h3>
           {isEnded ? (
             <>
               <h2>Auktionen är avslutad.</h2>
@@ -95,7 +97,11 @@ export default function ItemDetails() {
             </>
           ) : (
             <section className={styles.bidsSection}>
-              <AddBid auction={auction} auctionId={auction.AuctionID} onBidAdded={handleBidAdded}/>
+              <AddBid
+                auction={auction}
+                auctionId={auction.AuctionID}
+                onBidAdded={handleBidAdded}
+              />
               {bids && bids.length > 0 ? (
                 <table>
                   <thead>
@@ -118,7 +124,7 @@ export default function ItemDetails() {
                 </table>
               ) : (
                 <>
-                  <h2>Inga Bud än</h2>
+                  <h3>Inga Bud än</h3>
                   <button onClick={() => handleDelete(auction.AuctionID)}>
                     Radera
                   </button>
