@@ -4,6 +4,8 @@ export const AuctionContext = createContext();
 
 const AuctionProvider = (props) => {
   const [auctions, setAuctions] = useState([]);
+  const [activeAuctions, setActiveAuctions] = useState([]);
+  const [closedAuctions, setClosedAuctions] = useState([]);
   const [bids, setBids] = useState([]);
   const [auctionDetails, setAuctionDetails] = useState(null);
 
@@ -31,6 +33,12 @@ const AuctionProvider = (props) => {
       }
 
       setAuctions(data);
+
+      if (includeEnded) {
+        setClosedAuctions(data);
+      } else {
+        setActiveAuctions(data);
+      }
     } catch (error) {
       console.error("Error fetching auctions", error);
     }
@@ -72,6 +80,8 @@ const AuctionProvider = (props) => {
     <AuctionContext.Provider
       value={{
         auctions,
+        activeAuctions,
+        closedAuctions,
         fetchAuctions,
         bids,
         fetchBidsByAuctionId,
@@ -85,4 +95,3 @@ const AuctionProvider = (props) => {
 };
 
 export default AuctionProvider;
-
