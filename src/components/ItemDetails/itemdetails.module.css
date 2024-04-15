@@ -1,12 +1,18 @@
-.detailsContainer{
-    margin: 10px auto;
-    padding: 10px;
-    max-width: 1000px;
-    height: fit-content;
-    background-color: bisque;
+.detailsContainer {
+  margin: 10px auto;
+  padding: 10px;
+  max-width: 1000px;
+  height: fit-content;
+  background-color: bisque;
 }
-.image{
-    background-color: aliceblue;
-    width: 100%;
-    height: 400px;
+.image {
+  background-color: aliceblue;
+  width: 100%;
+  height: 400px;
+}
+tr,
+td,
+th {
+  border: solid gray 1px;
+  padding: 10px;
 }
