@@ -4,9 +4,12 @@ export const AuctionContext = createContext();
 
 const AuctionProvider = (props) => {
   const [auctions, setAuctions] = useState([]);
+  const [activeAuctions, setActiveAuctions] = useState([]);
+  const [closedAuctions, setClosedAuctions] = useState([]);
   const [bids, setBids] = useState([]);
+  const [auctionDetails, setAuctionDetails] = useState(null);
 
-  const fetchAuctions = async (searchTerm = "") => {
+  const fetchAuctions = async (searchTerm = "", includeEnded = false) => {
     let url = "https://auctioneer2.azurewebsites.net/auction/1zyx";
 
     try {
@@ -16,7 +19,7 @@ const AuctionProvider = (props) => {
       }
       let data = await response.json();
 
-      if (!searchTerm) {
+      if (!includeEnded) {
         const currentDatetime = new Date();
         data = data.filter(
           (auction) => new Date(auction.EndDate) > currentDatetime
@@ -30,8 +33,28 @@ const AuctionProvider = (props) => {
       }
 
       setAuctions(data);
+
+      if (includeEnded) {
+        setClosedAuctions(data);
+      } else {
+        setActiveAuctions(data);
+      }
     } catch (error) {
       console.error("Error fetching auctions", error);
+    }
+  };
+
+  const fetchAuctionById = async (auctionId) => {
+    const url = `https://auctioneer2.azurewebsites.net/auction/1zyx/${auctionId}`;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw Error("Failed to fetch auction details");
+      }
+      const data = await response.json();
+      setAuctionDetails(data);
+    } catch (error) {
+      console.error("Error fetching auction details", error);
     }
   };
 
@@ -55,7 +78,16 @@ const AuctionProvider = (props) => {
 
   return (
     <AuctionContext.Provider
-      value={{ auctions, fetchAuctions, bids, fetchBidsByAuctionId }}
+      value={{
+        auctions,
+        activeAuctions,
+        closedAuctions,
+        fetchAuctions,
+        bids,
+        fetchBidsByAuctionId,
+        fetchAuctionById,
+        auctionDetails,
+      }}
     >
       {props.children}
     </AuctionContext.Provider>
