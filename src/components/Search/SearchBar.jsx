@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AuctionContext } from "../../Context/AuctionContextProvider";
 import { useNavigate } from "react-router-dom";
+import styles from '../Search/searchbar.module.css'
 
 function SearchBar() {
   const navigate = useNavigate();
@@ -14,14 +15,14 @@ function SearchBar() {
   };
 
   return (
-    <form onSubmit={handleSearch}>
+    <form className={styles.formContainer} onSubmit={handleSearch}>
       <input
         type="text"
         placeholder="Sök Auktioner"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button type="submit">Sök</button>
+      <button className={styles.button} type="submit">Sök</button>
     </form>
   );
 }

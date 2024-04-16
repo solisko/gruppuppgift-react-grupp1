@@ -1,10 +1,12 @@
 .footer {
-    background-color: rgb(161, 117, 117);
-    color: white;
+    background-color: rgb(255, 255, 255);
+    color: black;
     padding: 40px;
     font-size: 18px;
     margin: 0 auto;
+    box-shadow: 0 -4px 2px -2px rgba(0,0,0,0.3); 
 }
+
 
 .contactInfo ul {
     list-style: none;
