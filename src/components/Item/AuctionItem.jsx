@@ -30,7 +30,7 @@ export default function AuctionItem({ auction }) {
     <div className={styles.auctionCard}>
       <h2>{auction.Title}</h2>
       <img className={styles.image} src={auction.Image || ''} alt={auction.Title || 'Auktionsbild'} />
-      <h3>{auction.Description}</h3>
+      <h3 className={styles.auctionDescription}>{auction.Description}</h3>
       <p>Starttid budgivning:
         <br />
         {formatDateTime(auction.StartDate)}

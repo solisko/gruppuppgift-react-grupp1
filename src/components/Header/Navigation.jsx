@@ -5,7 +5,9 @@ const Navigation = () => {
     
     return(
         <nav className= {styles.header}>
-            <h1>Auctioneers</h1>
+            <NavLink to="/">
+            <h1 className={styles.title}>Auctioneers</h1>
+            </NavLink>
             <div className= {styles.navContainer}>
                 <ul className= {styles.navLinks}>
                     <li><NavLink to="/">Hem</NavLink></li>
