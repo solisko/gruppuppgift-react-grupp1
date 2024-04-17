@@ -1,21 +1,34 @@
-.formContainer{
-    background-color: rgb(228, 228, 213);
-    width: 600px;
-    padding: 10px;
-    height: fit-content;
-    margin: 20px auto;
+.formContainer {
+  background-color: rgb(228, 228, 213);
+  max-width: 875px;
+  padding: 10px;
+  height: fit-content;
+  margin: 20px auto;
 }
-.form input, textarea, .createBtn{
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    border: none;
+.form {
+  display: flex;
+  flex-direction: column;
 }
-.form input[type=number]{
-    appearance: textfield;
+
+.inputs,
+.labels,
+.createBtn {
+  width: 100%;
+  font-size: 16px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: none;
 }
-.createBtn:hover{
-    background-color: beige;
-    outline: 1px inset black;
+.labels {
+  font-size: 18px;
+}
+.inputs {
+  padding: 10px 5px;
+}
+.form input[type="number"] {
+  appearance: textfield;
+}
+.createBtn:hover {
+  background-color: beige;
+  outline: 1px inset black;
 }

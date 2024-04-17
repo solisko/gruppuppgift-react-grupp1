@@ -21,6 +21,7 @@ function SearchBar() {
         placeholder="Sök Auktioner"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        className={styles.input}
       />
       <button className={styles.button} type="submit">Sök</button>
     </form>
