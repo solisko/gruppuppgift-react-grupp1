@@ -11,8 +11,8 @@ const formatDateTime = (dateTimeStr) => {
   return `${formattedDate}, kl. ${formattedTime}`;
 };
 
-export default function AuctionItem({ auction }) { 
-  if (!auction) { 
+export default function AuctionItem({ auction }) {
+  if (!auction) {
     return <div>Auktionen kunde inte laddas.</div>;
   }
 
@@ -31,19 +31,23 @@ export default function AuctionItem({ auction }) {
       <h2>{auction.Title}</h2>
       <img className={styles.image} src="" alt="" />
       <h3 className={styles.auctionDescription}>{auction.Description}</h3>
-      <p>Starttid budgivning:
+      <p>
+        Starttid budgivning:
         <br />
         {formatDateTime(auction.StartDate)}
-        </p>
-      <p>Sluttid budgivning:
+      </p>
+      <p>
+        Sluttid budgivning:
         <br />
         {formatDateTime(auction.EndDate)}
-        </p>
+      </p>
       <h3>Start pris: {auction.StartingPrice} SEK</h3>
       {isEnded ? (
         <div>
           <p>Auktion avslutad</p>
-          <button onClick={() => goToDetails(auction.AuctionID)}>Se detaljer</button>
+          <button onClick={() => goToDetails(auction.AuctionID)}>
+            Se detaljer
+          </button>
         </div>
       ) : (
         <button onClick={() => goToDetails(auction.AuctionID)}>Lägg bud</button>

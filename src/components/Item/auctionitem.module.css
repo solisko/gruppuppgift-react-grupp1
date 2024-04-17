@@ -15,3 +15,7 @@
     width: 100%;
     height: 250px;
   }
+
+  button{
+    margin-bottom: 10px;
+  }

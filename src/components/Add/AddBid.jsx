@@ -59,6 +59,7 @@ function AddBid({ auctionId, startingPrice, onBidAdded }) {
         onChange={(e) => setAmount(e.target.value)}
         required
       />
+      {error && <div style={{ color: "red" }}>{error}</div>}
       <label htmlFor="creator">Lagt av:</label>
       <input
         type="text"
@@ -67,7 +68,6 @@ function AddBid({ auctionId, startingPrice, onBidAdded }) {
         onChange={(e) => setBidder(e.target.value)}
         required
       />
-      {error && <div style={{ color: "red" }}>{error}</div>}
       <br />
       <button onClick={handleAddBid}>Lägg bud</button>
     </div>
