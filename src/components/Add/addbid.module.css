@@ -1,0 +1,7 @@
+.addbidWrapper{
+    display: flex;
+    flex-direction: column;
+}
+input, label{
+    padding: 10px;
+}

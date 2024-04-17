@@ -29,7 +29,7 @@ export default function AuctionItem({ auction }) {
   return (
     <div className={styles.auctionCard}>
       <h2>{auction.Title}</h2>
-      <img className={styles.image} src={auction.Image || ''} alt={auction.Title || 'Auktionsbild'} />
+      <img className={styles.image} src="" alt="" />
       <h3 className={styles.auctionDescription}>{auction.Description}</h3>
       <p>Starttid budgivning:
         <br />
@@ -46,7 +46,7 @@ export default function AuctionItem({ auction }) {
           <button onClick={() => goToDetails(auction.AuctionID)}>Se detaljer</button>
         </div>
       ) : (
-        <button onClick={() => goToDetails(auction.AuctionID)}>Lägg bud/Se detaljer</button>
+        <button onClick={() => goToDetails(auction.AuctionID)}>Lägg bud</button>
       )}
       <p>Upplagd av {auction.CreatedBy}</p>
     </div>

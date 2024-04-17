@@ -1,17 +1,16 @@
 .formContainer {
-    display: flex;
-    justify-content: center;
-    padding: 25px;
+  display: flex;
+  justify-content: center;
+  padding: 25px;
 }
 
-input[type="text"] {
-    width: 50%;
-    padding: 10px;
-    margin-right: 5px;
+.input {
+  width: 50%;
+  padding: 10px;
+  margin-right: 5px;
 }
 
 button {
-
-    padding: 10px;
-    cursor: pointer;
+  padding: 10px;
+  cursor: pointer;
 }

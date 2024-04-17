@@ -62,7 +62,7 @@ export default function AddAuction() {
   return (
     <div className={styles.formContainer}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="title">
+        <label htmlFor="title" className={styles.labels}>
           Titel:
           <input
             type="text"
@@ -70,18 +70,20 @@ export default function AddAuction() {
             value={Title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            className={styles.inputs}
           />
         </label>
-        <label htmlFor="description">
+        <label htmlFor="description" className={styles.labels}>
           Beskrivning:
           <textarea
             placeholder="Beskriv artikeln här..."
             value={Description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            className={styles.inputs}
           />
         </label>
-        <label htmlFor="startDate">
+        <label htmlFor="startDate" className={styles.labels}>
           Starttid:
           <input
             type="datetime-local"
@@ -89,9 +91,10 @@ export default function AddAuction() {
             min={getCurrentDateTime()}
             onChange={(e) => setStartDate(e.target.value)}
             required
+            className={styles.inputs}
           />
         </label>
-        <label htmlFor="endDate">
+        <label htmlFor="endDate" className={styles.labels}>
           Sluttid:
           <input
             type="datetime-local"
@@ -99,9 +102,10 @@ export default function AddAuction() {
             min={StartDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
+            className={styles.inputs}
           />
         </label>
-        <label htmlFor="startprice">
+        <label htmlFor="startprice" className={styles.labels}>
           Start pris:
           <input
             type="number"
@@ -109,9 +113,10 @@ export default function AddAuction() {
             value={StartingPrice}
             onChange={(e) => setStartingPrice(e.target.value)}
             required
+            className={styles.inputs}
           />
         </label>
-        <label htmlFor="creator">
+        <label htmlFor="creator" className={styles.labels}>
           Skapad av:
           <input
             type="text"
@@ -119,9 +124,12 @@ export default function AddAuction() {
             value={CreatedBy}
             onChange={(e) => setCreatedBy(e.target.value)}
             required
+            className={styles.inputs}
           />
         </label>
-        <button className={styles.createBtn} type="submit">Skapa auktion</button>
+        <button className={styles.createBtn} type="submit">
+          Skapa auktion
+        </button>
       </form>
     </div>
   );
