@@ -7,6 +7,7 @@ import AddBid from "../Add/AddBid";
 export default function ItemDetails() {
   const {
     auctions,
+    setAuctions,
     bids,
     fetchBidsByAuctionId,
     fetchAuctionById,
@@ -58,6 +59,7 @@ export default function ItemDetails() {
       if (!response.ok) {
         throw new Error("Failed to remove auction");
       }
+      setAuctions(auctions.filter((auct) => auct.AuctionID !== auctionId));
       window.history.back();
     } catch (error) {
       console.error("Error remove auction", error);
