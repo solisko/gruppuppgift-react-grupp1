@@ -1,20 +1,26 @@
 .auctionCard{
 flex: 0 1 20%;
 background-color: rgb(228, 228, 213);
-height: 450px;
+min-height: 450px;
 margin: 2%;
 padding: 10px;
 border: 1px solid black;
 box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 text-align: center;
+display: flex;
+flex-direction: column;
+overflow: hidden;
 }
 .auctionDescription {
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 10px;
 }
 
 .image{
     background-color: aliceblue;
     width: 100%;
-    height: 100px;
+    height: 50px;
+    object-fit: cover;
 }
