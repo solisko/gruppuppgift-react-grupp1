@@ -10,6 +10,9 @@
   width: 100%;
   height: 400px;
 }
+table{
+  margin: 15px 0;
+}
 tr,
 td,
 th {
