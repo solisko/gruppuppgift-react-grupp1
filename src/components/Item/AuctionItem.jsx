@@ -46,7 +46,7 @@ export default function AuctionItem({ auction }) {
           <button onClick={() => goToDetails(auction.AuctionID)}>Se detaljer</button>
         </div>
       ) : (
-        <button onClick={() => goToDetails(auction.AuctionID)}>Lägg bud/Se detaljer</button>
+        <button onClick={() => goToDetails(auction.AuctionID)}>Lägg bud</button>
       )}
       <p>Upplagd av {auction.CreatedBy}</p>
     </div>
