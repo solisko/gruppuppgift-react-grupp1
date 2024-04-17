@@ -11,6 +11,7 @@ function SearchBar() {
   const handleSearch = (e) => {
     e.preventDefault();
     fetchAuctions(searchTerm, true);
+    setSearchTerm("")
     navigate("/searchresults");
   };
 
