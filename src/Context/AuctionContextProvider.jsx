@@ -80,6 +80,7 @@ const AuctionProvider = (props) => {
     <AuctionContext.Provider
       value={{
         auctions,
+        setAuctions,
         activeAuctions,
         closedAuctions,
         fetchAuctions,

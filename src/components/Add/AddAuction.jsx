@@ -8,6 +8,7 @@ export default function AddAuction() {
   const [EndDate, setEndDate] = useState("");
   const [StartingPrice, setStartingPrice] = useState("");
   const [CreatedBy, setCreatedBy] = useState("");
+  const [successMsg, setSuccessMsg] = useState(false);
 
   const getCurrentDateTime = () => {
     const now = new Date();
@@ -47,7 +48,8 @@ export default function AddAuction() {
         throw new Error("Network response was not ok");
       }
 
-      console.log("Auction created successfully!");
+      console.timeLog("Auction created successfully!");
+      setSuccessMsg(true);
       setTitle("");
       setDescription("");
       setStartDate("");
@@ -60,77 +62,80 @@ export default function AddAuction() {
   };
 
   return (
-    <div className={styles.formContainer}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="title" className={styles.labels}>
-          Titel:
-          <input
-            type="text"
-            placeholder="Skriv titel här..."
-            value={Title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            className={styles.inputs}
-          />
-        </label>
-        <label htmlFor="description" className={styles.labels}>
-          Beskrivning:
-          <textarea
-            placeholder="Beskriv artikeln här..."
-            value={Description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-            className={styles.inputs}
-          />
-        </label>
-        <label htmlFor="startDate" className={styles.labels}>
-          Starttid:
-          <input
-            type="datetime-local"
-            value={StartDate}
-            min={getCurrentDateTime()}
-            onChange={(e) => setStartDate(e.target.value)}
-            required
-            className={styles.inputs}
-          />
-        </label>
-        <label htmlFor="endDate" className={styles.labels}>
-          Sluttid:
-          <input
-            type="datetime-local"
-            value={EndDate}
-            min={StartDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            required
-            className={styles.inputs}
-          />
-        </label>
-        <label htmlFor="startprice" className={styles.labels}>
-          Start pris:
-          <input
-            type="number"
-            placeholder="Summa..."
-            value={StartingPrice}
-            onChange={(e) => setStartingPrice(e.target.value)}
-            required
-            className={styles.inputs}
-          />
-        </label>
-        <label htmlFor="creator" className={styles.labels}>
-          Skapad av:
-          <input
-            type="text"
-            placeholder="Skriv ditt namn..."
-            value={CreatedBy}
-            onChange={(e) => setCreatedBy(e.target.value)}
-            required
-            className={styles.inputs}
-          />
-        </label>
-        <button className={styles.createBtn} type="submit">
-          Skapa auktion
-        </button>
-      </form>
+    <div>
+      {successMsg && <h2 style={{ color: "green" }}>Auktionen skapad!</h2>}
+      <div className={styles.formContainer}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <label htmlFor="title" className={styles.labels}>
+            Titel:
+            <input
+              type="text"
+              placeholder="Skriv titel här..."
+              value={Title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              className={styles.inputs}
+            />
+          </label>
+          <label htmlFor="description" className={styles.labels}>
+            Beskrivning:
+            <textarea
+              placeholder="Beskriv artikeln här..."
+              value={Description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              className={styles.inputs}
+            />
+          </label>
+          <label htmlFor="startDate" className={styles.labels}>
+            Starttid:
+            <input
+              type="datetime-local"
+              value={StartDate}
+              min={getCurrentDateTime()}
+              onChange={(e) => setStartDate(e.target.value)}
+              required
+              className={styles.inputs}
+            />
+          </label>
+          <label htmlFor="endDate" className={styles.labels}>
+            Sluttid:
+            <input
+              type="datetime-local"
+              value={EndDate}
+              min={StartDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              required
+              className={styles.inputs}
+            />
+          </label>
+          <label htmlFor="startprice" className={styles.labels}>
+            Start pris:
+            <input
+              type="number"
+              placeholder="Summa..."
+              value={StartingPrice}
+              onChange={(e) => setStartingPrice(e.target.value)}
+              required
+              className={styles.inputs}
+            />
+          </label>
+          <label htmlFor="creator" className={styles.labels}>
+            Skapad av:
+            <input
+              type="text"
+              placeholder="Skriv ditt namn..."
+              value={CreatedBy}
+              onChange={(e) => setCreatedBy(e.target.value)}
+              required
+              className={styles.inputs}
+            />
+          </label>
+          <button className={styles.createBtn} type="submit">
+            Skapa auktion
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
